@@ -63,9 +63,12 @@ Complete a month cost analysis of each Azure resource to give an estimate total 
 
 | Azure Resource | Service Tier | Monthly Cost |
 | ------------ | ------------ | ------------ |
-| *Azure Postgres Database* |     |              |
-| *Azure Service Bus*   |         |              |
-| ...                   |         |              |
+| *Azure Postgres Database* | Basic, 1 vCore, 5GiB | $38.56 |
+| *Azure Service Bus* | Basic | $0.05 |
+| *Azure App Service* | Free (F1) | $0.00 |
+| *Azure Storage* | Standard (GPv2) | $11.29 |
+| *Azure Function App* | Consumption | $1.80 |
 
 ## Architecture Explanation
-This is a placeholder section where you can provide an explanation and reasoning for your architecture selection for both the Azure Web App and Azure Function.
+Separating the logical structures in the processes and then deploying them to the available Azure microservices makes scalability easier when needed. Besides, using a service bus to coordinate queues helps avoid errors related to waiting times when multiple queues arise.
+And, Using Azure Database for PostgreSQL helps increase the performance of deployment, backup, and restore.
