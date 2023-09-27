@@ -72,3 +72,14 @@ Complete a month cost analysis of each Azure resource to give an estimate total 
 ## Architecture Explanation
 Separating the logical structures in the processes and then deploying them to the available Azure microservices makes scalability easier when needed. Besides, using a service bus to coordinate queues helps avoid errors related to waiting times when multiple queues arise.
 And, Using Azure Database for PostgreSQL helps increase the performance of deployment, backup, and restore.
+Details of the services I used to migrate from on-premises to Azure are below:
+1. Azure App Service
+   - With app service I can deploy simply and quickly. Additionally, it can scale without availability issues and can integrate load balancing.
+   - Because it is PaaS, there is not much infrastructure management and also more peace of mind about security issues.
+2. Azure Function App
+   - Combined with Azure Service Bus, I separated the processing of sending notifications to attendees into a separate function. It scales automatically and you only pay for compute resources when your functions are running. It saves costs because I think submitting a new notification will be infrequent.
+3. Azure Service Bus
+   - As stated above, in separating the notification sending processing into a separate function and deploying it to Azure Function App, I use Service Bus Queue to put the notification sending for each attendee into the queue, and process Handled in turn by Function App, helping to resolve HTTP errors such as timeout error, ....
+5. Azure Database for PostgreSQL
+   - Because it is PaaS, it comes with the necessary features to operate without any worries in production. For example: high availability, backup, restore, scalable, multi-region, ...
+   - Additionally, there are cost benefits from migrating from on-premises servers to Azure Database and operational savings from reduced infrastructure management
